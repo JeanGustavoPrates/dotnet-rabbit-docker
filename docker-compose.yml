@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  consumerrabbitmq:
+    image: ${DOCKER_REGISTRY-}consumerrabbitmq
+    build:
+      context: .
+      dockerfile: src/ConsumerRabbitMq/Dockerfile
+    depends_on:
+      - rabbit
+  publisherrabbitmq:
+    image: ${DOCKER_REGISTRY-}publisherrabbitmq
+    build:
+      context: .
+      dockerfile: src/PublisherRabbitMq/Dockerfile
+    depends_on:
+      - rabbit
+  rabbit:
+    image: rabbitmq:3-management
+    hostname: rabbit
+
